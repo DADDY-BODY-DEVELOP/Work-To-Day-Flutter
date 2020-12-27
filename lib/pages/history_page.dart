@@ -4,29 +4,28 @@ import 'package:flutter/material.dart';
 class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.lightBlueAccent,
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Text(
-                'Screen 2',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              margin: EdgeInsets.all(16),
+    return Container(
+      color: Colors.lightBlueAccent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+//        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            child: Text(
+              'Screen 1',
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-            FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Go back'),
-              color: Colors.white,
-            ),
-          ],
-        ),
+            margin: EdgeInsets.all(16),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Screen2()));
+            },
+            child: Text('Go to next screen'),
+            color: Colors.white,
+          ),
+        ],
       ),
     );
   }
