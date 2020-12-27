@@ -1,5 +1,5 @@
 import 'package:common_bottom_navigation_bar/constants.dart';
-import 'package:common_bottom_navigation_bar/screens/screen2.dart';
+import 'package:common_bottom_navigation_bar/pages/screen2.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/location_page.dart';
