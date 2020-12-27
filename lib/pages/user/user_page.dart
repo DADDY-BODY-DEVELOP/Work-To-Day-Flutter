@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:common_bottom_navigation_bar/screens/screen2.dart';
 
-class LocationPage extends StatelessWidget {
+class UserPage extends StatelessWidget {
+  final Function onNext;
+  UserPage({this.onNext});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,6 +21,7 @@ class LocationPage extends StatelessWidget {
             margin: EdgeInsets.all(16),
           ),
           FlatButton(
+            // onPressed: onNext,
             onPressed: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Screen2()));

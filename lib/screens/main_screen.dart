@@ -5,12 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../constants.dart';
-import '../pages/calendar_page.dart';
 // import '../pages/calendar_page.dart';
-// import '../pages/calendar_page.dart';
-import '../pages/home_page.dart';
+// import '../pages/home_page.dart';
+import '../pages/location_page.dart';
 import '../pages/profile_page.dart';
-// import '../pages/profile_page.dart';
+import '../pages/history_page.dart';
+import '../pages/user/user_page.dart';
+import '../pages/Report_page.dart';
 // import '../pages/profile_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,6 +23,8 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>()
@@ -47,26 +50,39 @@ class _MainScreenState extends State<MainScreen> {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: [
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     Feather.home,
+            //     color: kGoodLightGray,
+            //   ),
+            //   title: Text('HOME'),
+            //   activeIcon: Icon(
+            //     Feather.home,
+            //     color: kGoodPurple,
+            //   ),
+            // ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     FontAwesome.calendar,
+            //     color: kGoodLightGray,
+            //   ),
+            //   title: Text('CALENDAR'),
+            //   activeIcon: Icon(
+            //     FontAwesome.calendar,
+            //     color: kGoodPurple,
+            //   ),
+            // ),
             BottomNavigationBarItem(
               icon: Icon(
-                Feather.home,
+                Icons.location_on,
                 color: kGoodLightGray,
+                size: 36,
               ),
-              title: Text('HOME'),
+              title: Text('LOCATION'),
               activeIcon: Icon(
-                Feather.home,
+                Icons.location_on,
                 color: kGoodPurple,
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FontAwesome.calendar,
-                color: kGoodLightGray,
-              ),
-              title: Text('CALENDAR'),
-              activeIcon: Icon(
-                FontAwesome.calendar,
-                color: kGoodPurple,
+                size: 36,
               ),
             ),
             BottomNavigationBarItem(
@@ -82,17 +98,45 @@ class _MainScreenState extends State<MainScreen> {
                 size: 36,
               ),
             ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     Icons.location_on,
-            //     color: kGoodLightGray,
-            //   ),
-            //   title: Text('Location'),
-            //   activeIcon: Icon(
-            //     Icons.location_on,
-            //     color: kGoodPurple,
-            //   ),
-            // ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history,
+                color: kGoodLightGray,
+                size: 36,
+              ),
+              title: Text('HISTORY'),
+              activeIcon: Icon(
+                Icons.history,
+                color: kGoodPurple,
+                size: 36,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.supervisor_account,
+                color: kGoodLightGray,
+                size: 36,
+              ),
+              title: Text('USERS'),
+              activeIcon: Icon(
+                Icons.supervisor_account,
+                color: kGoodPurple,
+                size: 36,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.list_alt,
+                color: kGoodLightGray,
+                size: 36,
+              ),
+              title: Text('REPORT'),
+              activeIcon: Icon(
+                Icons.list_alt,
+                color: kGoodPurple,
+                size: 36,
+              ),
+            ),
           ],
           onTap: (index) {
             setState(() {
@@ -105,6 +149,8 @@ class _MainScreenState extends State<MainScreen> {
             _buildOffstageNavigator(0),
             _buildOffstageNavigator(1),
             _buildOffstageNavigator(2),
+            _buildOffstageNavigator(3),
+            _buildOffstageNavigator(4),
           ],
         ),
       ),
@@ -119,11 +165,17 @@ class _MainScreenState extends State<MainScreen> {
     return {
       '/': (context) {
         return [
-          HomePage(),
-          CalendarPage(
+          // HomePage(),
+          // CalendarPage(
+          //   onNext: _next,
+          // ),
+          LocationPage(),
+          ProfilePage(),
+          HistoryPage(),
+          UserPage(
             onNext: _next,
           ),
-          ProfilePage(),
+          ReportPage(),
         ].elementAt(index);
       },
     };
