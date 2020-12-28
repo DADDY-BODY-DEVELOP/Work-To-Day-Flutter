@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class ReportPage extends StatelessWidget {
+class UserAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +73,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Report'),
+        title: Text('User Add'),
       ),
       body: Container(
         color: Colors.white,

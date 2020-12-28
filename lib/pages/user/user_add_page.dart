@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class ReportPage extends StatelessWidget {
+class UserAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,26 +54,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     },
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: 'starValue');
-    _getValue();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _controller = TextEditingController(text: 'starValue');
+  //   _getValue();
+  // }
 
-  Future<void> _getValue() async {
-    await Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        _controller.text = 'circleValue';
-      });
-    });
-  }
+  // Future<void> _getValue() async {
+  //   await Future.delayed(const Duration(seconds: 3), () {
+  //     setState(() {
+  //       _controller.text = 'circleValue';
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Report'),
+        title: Text('User Add'),
       ),
       body: Container(
         color: Colors.white,
