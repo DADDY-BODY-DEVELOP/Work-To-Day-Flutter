@@ -1,35 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:common_bottom_navigation_bar/pages/screen2.dart'
+import './user_add_page.dart';
 
 class UserPage extends StatelessWidget {
-  final Function onNext;
-  UserPage({this.onNext});
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.lightBlueAccent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Text(
-              'Screen 1',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            margin: EdgeInsets.all(16),
-          ),
-          FlatButton(
-            // onPressed: onNext,
+    return Scaffold(
+      body: Container(
+        child: MyStatefulWidget(),
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  MyStatefulWidget({Key key}) : super(key: key);
+
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('User'),
+        actions: [
+          ElevatedButton(
+            child: Text('Add'),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Screen2()));
+                context,
+                MaterialPageRoute(builder: (context) => UserAddPage()),
+              );
             },
-            child: Text('Go to next screen'),
-            color: Colors.white,
           ),
         ],
+      ),
+      body: Container(
+        child: Form(
+          key: _oFormKey,
+          child: Scrollbar(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 15),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      filled: true,
+                      icon: Icon(Icons.search),
+                      labelText: 'Search *',
+                      hintText: 'กรอกข้อมูล',
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  ListView(
+                    restorationId: 'list_demo_list_view',
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    children: [
+                      // for (int index = 1; index < 21; index++)
+                      ListTile(
+                          leading: ExcludeSemantics(
+                            child: CircleAvatar(child: Text('1')),
+                          ),
+                          title: Text(
+                              "GalleryLocalizations.of(context).demoListsSecondary")),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

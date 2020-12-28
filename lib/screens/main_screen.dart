@@ -1,10 +1,8 @@
-import 'package:common_bottom_navigation_bar/constants.dart';
-import 'package:common_bottom_navigation_bar/pages/screen2.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/location_page.dart';
 import '../pages/profile_page.dart';
-import '../pages/history_page.dart';
+import '../pages/history/history_page.dart';
 import '../pages/user/user_page.dart';
 import '../pages/Report_page.dart';
 
@@ -15,13 +13,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  static const List _title = [
-    'Check IN',
-    'Profile',
-    'History',
-    'User',
-    'Report'
-  ];
   List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
@@ -31,11 +22,6 @@ class _MainScreenState extends State<MainScreen> {
   ];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +95,6 @@ class _MainScreenState extends State<MainScreen> {
               });
             },
           ),
-          appBar: AppBar(
-            title: Text(_title[_selectedIndex]),
-          ),
           body: Stack(
             children: [
               _buildOffstageNavigator(0),
@@ -124,24 +107,14 @@ class _MainScreenState extends State<MainScreen> {
         ));
   }
 
-  void _next() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Screen2()));
-  }
-
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {
     return {
       '/': (context) {
         return [
-          // HomePage(),
-          // CalendarPage(
-          //   onNext: _next,
-          // ),
           LocationPage(),
           ProfilePage(),
           HistoryPage(),
-          UserPage(
-            onNext: _next,
-          ),
+          UserPage(),
           ReportPage(),
         ].elementAt(index);
       },
