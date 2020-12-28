@@ -27,6 +27,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_icons: ^1.0.0+1
   custom_navigator: ^0.3.0
+  image_picker: ^0.6.7+17
 
 
   

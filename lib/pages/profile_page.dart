@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -23,6 +27,26 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+        source: ImageSource.camera,
+        imageQuality: 100,
+        preferredCameraDevice: CameraDevice.front,
+        maxHeight: 761,
+        maxWidth: 761);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
   TextEditingController _controller;
 
@@ -88,11 +112,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 15),
-                  Image(image: AssetImage('assets/image/test_view.jpg')),
+                  _image == null
+                      ? Image(image: AssetImage('assets/image/test_view.jpg'))
+                      : Image.file(_image),
                   SizedBox(height: 15),
                   CupertinoButton.filled(
                     child: Text('Upload'),
-                    onPressed: () {},
+                    onPressed: getImage,
                   ),
                   SizedBox(height: 15),
                   TextFormField(
