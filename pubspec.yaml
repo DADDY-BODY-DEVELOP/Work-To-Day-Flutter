@@ -28,6 +28,7 @@ dependencies:
   flutter_icons: ^1.0.0+1
   custom_navigator: ^0.3.0
   image_picker: ^0.6.7+17
+  http: ^0.12.2
 
 
   

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -33,10 +35,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Future getImage() async {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera,
-        imageQuality: 100,
+        imageQuality: 50,
         preferredCameraDevice: CameraDevice.front,
-        maxHeight: 761,
-        maxWidth: 761);
+        maxHeight: 500,
+        maxWidth: 500);
 
     setState(() {
       if (pickedFile != null) {
@@ -45,6 +47,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         print('No image selected.');
       }
     });
+
+    final bytes = File(_image.path).readAsBytesSync();
+    String img64 = base64Encode(bytes);
+    
+    var url = 'http://192.168.1.23:9000/api/user';
+    var response = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "username": "warayut.ta",
+          "password": "abc@123",
+          "status": "ADMIN",
+          "name": "warayut",
+          "linename": "taekrathok",
+          "team": "CHUN",
+          "image": "$img64",
+          "statusFlag": "A",
+          "createdBy": "000000000000000000000000",
+          "updatedBy": "000000000000000000000000"
+        }));
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
   }
 
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
