@@ -19,6 +19,7 @@ environment:
 dependencies:
   select_form_field: ^1.1.0
   flutter_gen: ^1.3.1
+  flutter_slidable:
   flutter:
     sdk: flutter
 
