@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
-import 'package:select_form_field/select_form_field.dart';
+import './../history/history_page.dart';
 
 class LocationPage extends StatelessWidget {
   @override
@@ -40,7 +39,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   color: Colors.orange, // button color
                   child: InkWell(
                     splashColor: Colors.green, // splash color
-                    onTap: () {}, // button pressed
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HistoryPage()),
+                    ), // button pressed
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

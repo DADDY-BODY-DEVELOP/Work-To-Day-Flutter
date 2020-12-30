@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import './user_add_page.dart';
+import './user_edit_page.dart';
 // import './user_list_page.dart';
 
 class UserPage extends StatelessWidget {
@@ -62,11 +63,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         caption: 'Edit',
                         color: Colors.grey.shade200,
                         icon: Icons.more_horiz,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserEditPage()),
+                        ),
                       ),
                       IconSlideAction(
                         caption: 'Delete',
                         color: Colors.red,
                         icon: Icons.delete,
+                        // onTap: () => _showSnackBar('Delete'),
                       ),
                     ],
                     dismissal: SlidableDismissal(

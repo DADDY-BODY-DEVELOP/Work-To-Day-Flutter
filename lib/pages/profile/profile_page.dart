@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -50,7 +49,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     final bytes = File(_image.path).readAsBytesSync();
     String img64 = base64Encode(bytes);
-    
+
     var url = 'http://192.168.1.23:9000/api/user';
     var response = await http.post(url,
         headers: <String, String>{
@@ -70,7 +69,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         }));
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
-
   }
 
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
@@ -150,6 +148,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
+                      // icon: Icon(FontAwesomeIcons.person),
                       icon: Icon(Icons.person),
                       labelText: 'Username *',
                       hintText: 'Username 8 - 12',
@@ -159,7 +158,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.lock),
                       labelText: 'Password *',
                       hintText: 'Password 8 - 12 , a-z',
                     ),
@@ -169,7 +168,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.lock),
                       labelText: 'Confilm Password *',
                       hintText: 'Password',
                     ),
@@ -179,7 +178,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.folder_shared),
                       labelText: 'NickName *',
                       hintText: 'What Your Name ?',
                     ),

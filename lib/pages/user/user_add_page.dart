@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class UserAddPage extends StatelessWidget {
   @override
@@ -23,6 +28,49 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+        preferredCameraDevice: CameraDevice.front,
+        maxHeight: 500,
+        maxWidth: 500);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+
+    final bytes = File(_image.path).readAsBytesSync();
+    String img64 = base64Encode(bytes);
+
+    var url = 'http://192.168.1.23:9000/api/user';
+    var response = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          "username": "warayut.ta",
+          "password": "abc@123",
+          "status": "ADMIN",
+          "name": "warayut",
+          "linename": "taekrathok",
+          "team": "CHUN",
+          "image": "$img64",
+          "statusFlag": "A",
+          "createdBy": "000000000000000000000000",
+          "updatedBy": "000000000000000000000000"
+        }));
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
   TextEditingController _controller;
 
@@ -54,21 +102,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     },
   ];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller = TextEditingController(text: 'starValue');
-  //   _getValue();
-  // }
-
-  // Future<void> _getValue() async {
-  //   await Future.delayed(const Duration(seconds: 3), () {
-  //     setState(() {
-  //       _controller.text = 'circleValue';
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,16 +121,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 15),
-                  Image(image: AssetImage('assets/image/test_view.jpg')),
+                  _image == null
+                      ? Image(image: AssetImage('assets/image/test_view.jpg'))
+                      : Image.file(_image),
                   SizedBox(height: 15),
                   CupertinoButton.filled(
                     child: Text('Upload'),
-                    onPressed: () {},
+                    onPressed: getImage,
                   ),
                   SizedBox(height: 15),
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
+                      // icon: Icon(FontAwesomeIcons.person),
                       icon: Icon(Icons.person),
                       labelText: 'Username *',
                       hintText: 'Username 8 - 12',
@@ -107,7 +143,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.lock),
                       labelText: 'Password *',
                       hintText: 'Password 8 - 12 , a-z',
                     ),
@@ -117,7 +153,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.lock),
                       labelText: 'Confilm Password *',
                       hintText: 'Password',
                     ),
@@ -127,7 +163,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   TextFormField(
                     decoration: const InputDecoration(
                       filled: true,
-                      icon: Icon(Icons.person),
+                      icon: Icon(Icons.folder_shared),
                       labelText: 'NickName *',
                       hintText: 'What Your Name ?',
                     ),
