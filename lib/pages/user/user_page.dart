@@ -15,18 +15,13 @@ class UserPage extends StatelessWidget {
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
-
-  @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
-
   Widget build(BuildContext context) {
-    var user_list = [
+    const user_list = [
       {
         'id': '1',
         'img': 'assets/image/test_view.jpg',
