@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import './user_add_page.dart';
+<<<<<<< Updated upstream
 // import './user_list_page.dart';
+=======
+import './user_edit_page.dart';
+>>>>>>> Stashed changes
 
 class UserPage extends StatelessWidget {
   @override
