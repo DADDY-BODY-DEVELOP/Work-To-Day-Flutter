@@ -4,7 +4,7 @@ import '../pages/checkin/check_in_page.dart';
 import '../pages/profile/profile_page.dart';
 import '../pages/history/history_page.dart';
 import '../pages/user/user_page.dart';
-import '../pages/Report_page.dart';
+import '../pages/report/report_page.dart';
 
 class MainScreen extends StatefulWidget {
   @override
