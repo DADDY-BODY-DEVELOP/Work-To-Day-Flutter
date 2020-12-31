@@ -25,10 +25,9 @@ class _MainScreenState extends State<MainScreen> {
   Future logoutPage() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
+
+    MaterialPageRoute route = MaterialPageRoute(builder: (ctx) => HomeScreen());
+    await Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 
   final nameTitleBar = ['CHECK IN', 'PROFILE', 'HISTORY', 'USER', 'REPORT'];

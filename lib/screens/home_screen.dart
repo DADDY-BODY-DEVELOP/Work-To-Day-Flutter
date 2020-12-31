@@ -9,7 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String nameUser;
+  String userID;
   @override
   void initState() {
     super.initState();
@@ -20,15 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
-        nameUser = preferences.getString('status');
+        userID = preferences.getString('userID');
       });
+      print(userID);
     } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: nameUser == null ? Login() : MainScreen(),
+      body: userID == null ? Login() : MainScreen(),
     );
   }
 }
