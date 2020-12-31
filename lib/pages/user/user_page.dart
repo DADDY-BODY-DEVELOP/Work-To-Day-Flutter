@@ -37,20 +37,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('User'),
-        actions: [
-          ElevatedButton(
-            child: Text('Add'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserAddPage()),
-              );
-            },
-          ),
-        ],
-      ),
       body: Container(
         child: new Column(
           children: user_list

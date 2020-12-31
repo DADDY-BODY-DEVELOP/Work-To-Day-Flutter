@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:work_to_day/screens/home_screen.dart';
 
 import '../pages/checkin/check_in_page.dart';
 import '../pages/profile/profile_page.dart';
@@ -20,7 +22,16 @@ class _MainScreenState extends State<MainScreen> {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>()
   ];
+  Future logoutPage() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  }
 
+  final nameTitleBar = ['CHECK IN', 'PROFILE', 'HISTORY', 'USER', 'REPORT'];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -93,6 +104,15 @@ class _MainScreenState extends State<MainScreen> {
               });
             },
           ),
+          appBar: AppBar(
+            title: Text(nameTitleBar[_selectedIndex]),
+            actions: [
+              ElevatedButton(
+                child: Icon(Icons.exit_to_app),
+                onPressed: logoutPage,
+              ),
+            ],
+          ),
           body: Stack(
             children: [
               _buildOffstageNavigator(0),
@@ -109,7 +129,7 @@ class _MainScreenState extends State<MainScreen> {
     return {
       '/': (context) {
         return [
-          LocationPage(),
+          CheckInPage(),
           ProfilePage(),
           HistoryPage(),
           UserPage(),

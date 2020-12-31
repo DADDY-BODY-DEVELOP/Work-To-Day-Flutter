@@ -72,9 +72,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Report'),
-      ),
       body: Container(
         color: Colors.white,
         alignment: Alignment.center,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+
   Widget build(BuildContext _history) {
     final List<Map<String, dynamic>> _history = [
       {
@@ -104,9 +106,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('History'),
-      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
