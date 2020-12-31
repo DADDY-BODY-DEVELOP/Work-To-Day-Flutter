@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
-import 'package:select_form_field/select_form_field.dart';
+import './report_list_page.dart';
 
 class ReportPage extends StatelessWidget {
   @override
@@ -23,51 +22,489 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
-  TextEditingController _controller;
-
-  String _valueChanged = '';
-  String _valueToValidate = '';
-  String _valueSaved = '';
-
-  final List<Map<String, dynamic>> _items = [
+  final List<Map<String, dynamic>> _testUser = [
     {
-      'value': '',
-      'label': 'เลือกทีม',
-      'enable': false,
-      'icon': Icon(Icons.stop),
+      'id': '1',
+      'date': '01-12-63',
+      'shift': 'morning',
+      'user': 'nong A',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
     },
     {
-      'value': 'Dong',
-      'label': 'ทีม Dong',
-      'icon': Icon(Icons.stop),
+      'id': '2',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong B',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
     },
     {
-      'value': 'Jeeb',
-      'label': 'ทีม Jeeb',
-      'icon': Icon(Icons.stop),
+      'id': '3',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong C',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
     },
     {
-      'value': 'Tae',
-      'label': 'ทีม Tae',
-      'icon': Icon(Icons.stop),
+      'id': '4',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong D',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '5',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong E',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '6',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong F',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '7',
+      'date': '02-12-63',
+      'shift': 'morning',
+      'user': 'nong G',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '8',
+      'date': '01-12-63',
+      'shift': 'afternoon',
+      'user': 'nong A',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '9',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong B',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '10',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong C',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '11',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong D',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '12',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong E',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '13',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong F',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '14',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+      'user': 'nong G',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '15',
+      'date': '01-12-63',
+      'shift': 'midnight',
+      'user': 'nong A',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '16',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong B',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '17',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong C',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '18',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong D',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '19',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong E',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '20',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong F',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '21',
+      'date': '02-12-63',
+      'shift': 'midnight',
+      'user': 'nong G',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '22',
+      'date': '03-12-63',
+      'shift': 'morning',
+      'user': 'nong H',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '23',
+      'date': '03-12-63',
+      'shift': 'afternoon',
+      'user': 'nong i',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '24',
+      'date': '03-12-63',
+      'shift': 'midnight',
+      'user': 'nong h',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '25',
+      'date': '04-12-63',
+      'shift': 'morning',
+      'user': 'nong H',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '26',
+      'date': '04-12-63',
+      'shift': 'afternoon',
+      'user': 'nong i',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '27',
+      'date': '04-12-63',
+      'shift': 'midnight',
+      'user': 'nong h',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '28',
+      'date': '05-12-63',
+      'shift': 'morning',
+      'user': 'nong H',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '29',
+      'date': '05-12-63',
+      'shift': 'afternoon',
+      'user': 'nong i',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '30',
+      'date': '05-12-63',
+      'shift': 'midnight',
+      'user': 'nong h',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '31',
+      'date': '06-12-63',
+      'shift': 'morning',
+      'user': 'nong H',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '32',
+      'date': '06-12-63',
+      'shift': 'afternoon',
+      'user': 'nong i',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
+    },
+    {
+      'id': '33',
+      'date': '06-12-63',
+      'shift': 'midnight',
+      'user': 'nong h',
+      'team': 'doong',
+      'time_in': '13.00',
+      'status_in': 'ตรงเวลา',
+      'time_out': '21.30',
+      'status_out': 'ออกก่อนเวลา',
     },
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: 'starValue');
-    _getValue();
-  }
-
-  Future<void> _getValue() async {
-    await Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        _controller.text = 'circleValue';
-      });
-    });
-  }
+  final List<Map<String, dynamic>> _testDay = [
+    {
+      'id': '1',
+      'date': '01-12-63',
+    },
+    {
+      'id': '2',
+      'date': '02-12-63',
+    },
+    {
+      'id': '3',
+      'date': '03-12-63',
+    },
+    {
+      'id': '4',
+      'date': '04-12-63',
+    },
+    {
+      'id': '5',
+      'date': '05-12-63',
+    },
+    {
+      'id': '6',
+      'date': '06-12-63',
+    },
+  ];
+  final List<Map<String, dynamic>> _testShift = [
+    {
+      'id': '1',
+      'date': '01-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '2',
+      'date': '01-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '3',
+      'date': '01-12-63',
+      'shift': 'midnight',
+    },
+    {
+      'id': '4',
+      'date': '02-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '5',
+      'date': '02-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '6',
+      'date': '02-12-63',
+      'shift': 'midnight',
+    },
+    {
+      'id': '7',
+      'date': '03-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '8',
+      'date': '03-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '9',
+      'date': '03-12-63',
+      'shift': 'midnight',
+    },
+    {
+      'id': '10',
+      'date': '04-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '11',
+      'date': '04-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '12',
+      'date': '04-12-63',
+      'shift': 'midnight',
+    },
+    {
+      'id': '13',
+      'date': '05-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '14',
+      'date': '05-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '15',
+      'date': '05-12-63',
+      'shift': 'midnight',
+    },
+    {
+      'id': '16',
+      'date': '05-12-63',
+      'shift': 'morning',
+    },
+    {
+      'id': '17',
+      'date': '05-12-63',
+      'shift': 'afternoon',
+    },
+    {
+      'id': '18',
+      'date': '05-12-63',
+      'shift': 'midnight',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -75,130 +512,316 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: Text('Report'),
       ),
-      body: Container(
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: Form(
-          key: _oFormKey,
-          child: Scrollbar(
-            child: SingleChildScrollView(
-              dragStartBehavior: DragStartBehavior.down,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: 15),
-                  Image(image: AssetImage('assets/image/test_view.jpg')),
-                  SizedBox(height: 15),
-                  CupertinoButton.filled(
-                    child: Text('Upload'),
-                    onPressed: () {},
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.person),
-                      labelText: 'Username *',
-                      hintText: 'Username 8 - 12',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.person),
-                      labelText: 'Password *',
-                      hintText: 'Password 8 - 12 , a-z',
-                    ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.person),
-                      labelText: 'Confilm Password *',
-                      hintText: 'Password',
-                    ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.person),
-                      labelText: 'NickName *',
-                      hintText: 'What Your Name ?',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.person),
-                      labelText: 'LineName *',
-                      hintText: 'Line Name ?',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  SelectFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.format_shapes),
-                      hintStyle: TextStyle(color: Colors.grey[800]),
-                      hintText: "Name",
-                    ),
-                    controller: _controller,
-                    labelText: 'Shape',
-                    dialogTitle: 'Pick a item',
-                    dialogCancelBtn: 'CANCEL',
-                    enableSearch: true,
-                    dialogSearchHint: 'Search item',
-                    items: _items,
-                    onChanged: (val) => setState(() => _valueChanged = val),
-                    validator: (val) {
-                      setState(() => _valueToValidate = val);
-                      return null;
-                    },
-                    onSaved: (val) => setState(() => _valueSaved = val),
-                  ),
-                  SizedBox(height: 15),
-                  SelectableText(_valueChanged),
-                  SizedBox(height: 15),
-                  SelectableText(_valueToValidate),
-                  SizedBox(height: 15),
-                  SelectableText(_valueSaved),
-                  SizedBox(height: 15),
-                  RaisedButton(
-                    onPressed: () {
-                      final loForm = _oFormKey.currentState;
+      body: new Container(
+        child: new ListView(
+          padding: new EdgeInsets.all(7.0),
+          children:
+              List.generate(_testDay.length, (i) => new CustomCard()).toList(),
+        ),
+      ),
+    );
+  }
+}
 
-                      if (loForm.validate()) {
-                        loForm.save();
-                      }
-                    },
-                    child: Text('Submit'),
-                  ),
-                  SizedBox(height: 15),
-                  RaisedButton(
-                    onPressed: () {
-                      final loForm = _oFormKey.currentState;
-                      loForm.reset();
-                      setState(() {
-                        _valueChanged = '';
-                        _valueToValidate = '';
-                        _valueSaved = '';
-                      });
-                    },
-                    child: Text('Reset'),
-                  ),
-                  SizedBox(height: 30),
-                ],
+class CustomCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Card(
+      child: new Column(
+        children: <Widget>[
+          new Text(
+            'วันที่ 13-05-63',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Card(
+            child: InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportListPage()),
+              ),
+              child: new Container(
+                padding: new EdgeInsets.all(7.0),
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      flex: 3,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.wb_sunny,
+                            color: Colors.amberAccent[400],
+                          ),
+                          Icon(
+                            Icons.person,
+                            color: Colors.brown[700],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.brown[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.exit_to_app,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.alarm,
+                            color: Colors.red[600],
+                          ),
+                          Text(
+                            ' : 0',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.launch,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+          Card(
+            child: InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportListPage()),
+              ),
+              child: new Container(
+                padding: new EdgeInsets.all(7.0),
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      flex: 3,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.wb_twighlight,
+                            color: Colors.orange[700],
+                          ),
+                          Icon(
+                            Icons.person,
+                            color: Colors.brown[700],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.brown[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.exit_to_app,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.alarm,
+                            color: Colors.red[600],
+                          ),
+                          Text(
+                            ' : 0',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.launch,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Card(
+            child: InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportListPage()),
+              ),
+              child: new Container(
+                padding: new EdgeInsets.all(7.0),
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      flex: 3,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.bedtime,
+                            color: Colors.purpleAccent[700],
+                          ),
+                          Icon(
+                            Icons.person,
+                            color: Colors.brown[700],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.brown[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.exit_to_app,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.alarm,
+                            color: Colors.red[600],
+                          ),
+                          Text(
+                            ' : 0',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Expanded(
+                      flex: 2,
+                      child: new Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.launch,
+                            color: Colors.green[600],
+                          ),
+                          Text(
+                            ' : 7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
