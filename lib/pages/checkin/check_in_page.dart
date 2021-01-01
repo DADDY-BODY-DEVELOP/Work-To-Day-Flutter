@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 
@@ -27,13 +28,43 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String userID;
+  @override
+  void initState() {
+    super.initState();
+    checkPrereferences();
+  }
+
+  Future<Null> checkPrereferences() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        userID = preferences.getString('userID');
+      });
+      print(userID);
+    } catch (e) {}
+  }
+
   File _image;
   final picker = ImagePicker();
 
   void getHttp() async {
     try {
-      Response response = await Dio().get("http://178.128.215.172:9000/");
-      print(response.data["status"]);
+      final bytes = File(_image.path).readAsBytesSync();
+      String img64 = base64Encode(bytes);
+
+      // print(img64);
+      Response response =
+          await Dio().post("http://178.128.215.172/api/checkin", data: {
+        "userId": "5fee3014e2ebb0f5ccdab75f",
+        "image": img64,
+        "location": "123",
+        "workShiftID": "5fc3c171f4877e1c38aeede1"
+      });
+      print(response.data);
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) => HistoryPage()),
+      );
     } catch (e) {
       print(e);
     }
@@ -59,10 +90,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       _showMyDialog();
     } else {
       getHttp();
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HistoryPage()),
-      // );
     }
   }
 
