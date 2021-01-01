@@ -107,43 +107,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: Text('History'),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-          child: Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
-                height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
-                  itemCount: _history.length,
-                  itemBuilder: (context, int index) {
-                    return Container(
-                      // height: MediaQuery.of(context).size.width * 0.5,
-                      child: Card(
-                        color: (_history[index]['color']),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        elevation: 8,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(_history[index]['img_in'])),
-                          title: Text(_history[index]['date']),
-                          subtitle: Text(
-                            'Secondary Text',
-                            style:
-                                TextStyle(color: Colors.black.withOpacity(0.6)),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+        height: MediaQuery.of(context).size.height,
+        child: ListView.builder(
+          itemCount: _history.length,
+          itemBuilder: (context, int index) {
+            return Container(
+              // height: MediaQuery.of(context).size.width * 0.5,
+              child: Card(
+                color: (_history[index]['color']),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                elevation: 8,
+                child: ListTile(
+                  leading: CircleAvatar(
+                      backgroundImage: AssetImage(_history[index]['img_in'])),
+                  title: Text(_history[index]['date']),
+                  subtitle: Text(
+                    'Secondary Text',
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
                 ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

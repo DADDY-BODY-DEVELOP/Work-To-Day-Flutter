@@ -22,371 +22,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  final List<Map<String, dynamic>> _testUser = [
-    {
-      'id': '1',
-      'date': '01-12-63',
-      'shift': 'morning',
-      'user': 'nong A',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '2',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong B',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '3',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong C',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '4',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong D',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '5',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong E',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '6',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong F',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '7',
-      'date': '02-12-63',
-      'shift': 'morning',
-      'user': 'nong G',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '8',
-      'date': '01-12-63',
-      'shift': 'afternoon',
-      'user': 'nong A',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '9',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong B',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '10',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong C',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '11',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong D',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '12',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong E',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '13',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong F',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '14',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-      'user': 'nong G',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '15',
-      'date': '01-12-63',
-      'shift': 'midnight',
-      'user': 'nong A',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '16',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong B',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '17',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong C',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '18',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong D',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '19',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong E',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '20',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong F',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '21',
-      'date': '02-12-63',
-      'shift': 'midnight',
-      'user': 'nong G',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '22',
-      'date': '03-12-63',
-      'shift': 'morning',
-      'user': 'nong H',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '23',
-      'date': '03-12-63',
-      'shift': 'afternoon',
-      'user': 'nong i',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '24',
-      'date': '03-12-63',
-      'shift': 'midnight',
-      'user': 'nong h',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '25',
-      'date': '04-12-63',
-      'shift': 'morning',
-      'user': 'nong H',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '26',
-      'date': '04-12-63',
-      'shift': 'afternoon',
-      'user': 'nong i',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '27',
-      'date': '04-12-63',
-      'shift': 'midnight',
-      'user': 'nong h',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '28',
-      'date': '05-12-63',
-      'shift': 'morning',
-      'user': 'nong H',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '29',
-      'date': '05-12-63',
-      'shift': 'afternoon',
-      'user': 'nong i',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '30',
-      'date': '05-12-63',
-      'shift': 'midnight',
-      'user': 'nong h',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '31',
-      'date': '06-12-63',
-      'shift': 'morning',
-      'user': 'nong H',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '32',
-      'date': '06-12-63',
-      'shift': 'afternoon',
-      'user': 'nong i',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-    {
-      'id': '33',
-      'date': '06-12-63',
-      'shift': 'midnight',
-      'user': 'nong h',
-      'team': 'doong',
-      'time_in': '13.00',
-      'status_in': 'ตรงเวลา',
-      'time_out': '21.30',
-      'status_out': 'ออกก่อนเวลา',
-    },
-  ];
   final List<Map<String, dynamic>> _testDay = [
     {
       'id': '1',
@@ -412,97 +47,49 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'id': '6',
       'date': '06-12-63',
     },
-  ];
-  final List<Map<String, dynamic>> _testShift = [
-    {
-      'id': '1',
-      'date': '01-12-63',
-      'shift': 'morning',
-    },
-    {
-      'id': '2',
-      'date': '01-12-63',
-      'shift': 'afternoon',
-    },
-    {
-      'id': '3',
-      'date': '01-12-63',
-      'shift': 'midnight',
-    },
-    {
-      'id': '4',
-      'date': '02-12-63',
-      'shift': 'morning',
-    },
-    {
-      'id': '5',
-      'date': '02-12-63',
-      'shift': 'afternoon',
-    },
-    {
-      'id': '6',
-      'date': '02-12-63',
-      'shift': 'midnight',
-    },
     {
       'id': '7',
-      'date': '03-12-63',
-      'shift': 'morning',
+      'date': '07-12-63',
     },
     {
       'id': '8',
-      'date': '03-12-63',
-      'shift': 'afternoon',
+      'date': '08-12-63',
     },
     {
       'id': '9',
-      'date': '03-12-63',
-      'shift': 'midnight',
+      'date': '09-12-63',
     },
     {
-      'id': '10',
-      'date': '04-12-63',
-      'shift': 'morning',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '11',
-      'date': '04-12-63',
-      'shift': 'afternoon',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '12',
-      'date': '04-12-63',
-      'shift': 'midnight',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '13',
-      'date': '05-12-63',
-      'shift': 'morning',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '14',
-      'date': '05-12-63',
-      'shift': 'afternoon',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '15',
-      'date': '05-12-63',
-      'shift': 'midnight',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '16',
-      'date': '05-12-63',
-      'shift': 'morning',
+      'id': '6',
+      'date': '06-12-63',
     },
     {
-      'id': '17',
-      'date': '05-12-63',
-      'shift': 'afternoon',
-    },
-    {
-      'id': '18',
-      'date': '05-12-63',
-      'shift': 'midnight',
+      'id': '6',
+      'date': '06-12-63',
     },
   ];
 
@@ -512,316 +99,345 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: Text('Report'),
       ),
-      body: new Container(
-        child: new ListView(
-          padding: new EdgeInsets.all(7.0),
-          children:
-              List.generate(_testDay.length, (i) => new CustomCard()).toList(),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+        child: ListView.builder(
+          itemCount: _testDay.length,
+          itemBuilder: (context, int index) {
+            return Column(
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: ListTile(
+                    title: Text(_testDay[index]['date']),
+                    subtitle: Column(
+                      //   itemCount: _testShift.length,
+                      //   itemBuilder: (context, int index) {
+                      //     return Column(
+                      //       children: [
+                      //         Card(
+                      //           shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(12.0),
+                      //           ),
+                      //           child: ListTile(
+                      //             title: Text(_testShift[index]['shift']),
+                      //             subtitle: Card(),
+                      //           ),
+                      //         )
+                      //       ],
+                      //     );
+                      //   },
+                      children: [
+                        new Card(
+                          child: new InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReportListPage()),
+                            ),
+                            child: new Container(
+                              padding: new EdgeInsets.all(7.0),
+                              child: new Row(
+                                children: <Widget>[
+                                  new Expanded(
+                                    flex: 3,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.wb_sunny,
+                                          color: Colors.amberAccent[400],
+                                        ),
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.brown[700],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.brown[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.exit_to_app,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.alarm,
+                                          color: Colors.red[600],
+                                        ),
+                                        Text(
+                                          ' : 0',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.launch,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        new Card(
+                          child: new InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReportListPage()),
+                            ),
+                            child: new Container(
+                              padding: new EdgeInsets.all(7.0),
+                              child: new Row(
+                                children: <Widget>[
+                                  new Expanded(
+                                    flex: 3,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.wb_twighlight,
+                                          color: Colors.orange[700],
+                                        ),
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.brown[700],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.brown[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.exit_to_app,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.alarm,
+                                          color: Colors.red[600],
+                                        ),
+                                        Text(
+                                          ' : 0',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.launch,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        new Card(
+                          child: new InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReportListPage()),
+                            ),
+                            child: new Container(
+                              padding: new EdgeInsets.all(7.0),
+                              child: new Row(
+                                children: <Widget>[
+                                  new Expanded(
+                                    flex: 3,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.bedtime,
+                                          color: Colors.purpleAccent[700],
+                                        ),
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.brown[700],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.brown[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.exit_to_app,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.alarm,
+                                          color: Colors.red[600],
+                                        ),
+                                        Text(
+                                          ' : 0',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  new Expanded(
+                                    flex: 2,
+                                    child: new Wrap(
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.launch,
+                                          color: Colors.green[600],
+                                        ),
+                                        Text(
+                                          ' : 7',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
         ),
-      ),
-    );
-  }
-}
-
-class CustomCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Card(
-      child: new Column(
-        children: <Widget>[
-          new Text(
-            'วันที่ 13-05-63',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportListPage()),
-              ),
-              child: new Container(
-                padding: new EdgeInsets.all(7.0),
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                      flex: 3,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wb_sunny,
-                            color: Colors.amberAccent[400],
-                          ),
-                          Icon(
-                            Icons.person,
-                            color: Colors.brown[700],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.brown[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.exit_to_app,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.alarm,
-                            color: Colors.red[600],
-                          ),
-                          Text(
-                            ' : 0',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.launch,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportListPage()),
-              ),
-              child: new Container(
-                padding: new EdgeInsets.all(7.0),
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                      flex: 3,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wb_twighlight,
-                            color: Colors.orange[700],
-                          ),
-                          Icon(
-                            Icons.person,
-                            color: Colors.brown[700],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.brown[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.exit_to_app,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.alarm,
-                            color: Colors.red[600],
-                          ),
-                          Text(
-                            ' : 0',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.launch,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Card(
-            child: InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportListPage()),
-              ),
-              child: new Container(
-                padding: new EdgeInsets.all(7.0),
-                child: new Row(
-                  children: <Widget>[
-                    new Expanded(
-                      flex: 3,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.bedtime,
-                            color: Colors.purpleAccent[700],
-                          ),
-                          Icon(
-                            Icons.person,
-                            color: Colors.brown[700],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.brown[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.exit_to_app,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.alarm,
-                            color: Colors.red[600],
-                          ),
-                          Text(
-                            ' : 0',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Expanded(
-                      flex: 2,
-                      child: new Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.launch,
-                            color: Colors.green[600],
-                          ),
-                          Text(
-                            ' : 7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
