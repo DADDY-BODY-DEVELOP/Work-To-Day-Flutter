@@ -397,37 +397,40 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: new Column(
         children: <Widget>[
           Card(
-            child: new Center(
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(children: <InlineSpan>[
-                        TextSpan(
-                          text: '14-12-63',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[600]),
-                        ),
-                      ]),
+            child: Container(
+              padding: new EdgeInsets.all(7.0),
+              child: new Center(
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(children: <InlineSpan>[
+                          TextSpan(
+                            text: '14-12-63',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red[600]),
+                          ),
+                        ]),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(children: <InlineSpan>[
-                        TextSpan(
-                          text: 'Moning',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red[600]),
-                        ),
-                      ]),
+                    Expanded(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(children: <InlineSpan>[
+                          TextSpan(
+                            text: 'Moning',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red[600]),
+                          ),
+                        ]),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -34,15 +34,120 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         'name': 'หนอน',
         'line_name': 'PRA',
       },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
+      {
+        'id': '2',
+        'img': 'assets/image/test_view.jpg',
+        'name': 'หนอน',
+        'line_name': 'PRA',
+      },
     ];
 
     return Scaffold(
       body: Container(
-        child: new Column(
-          children: user_list
-              .map((e) => new Slidable(
-                    key: ValueKey(e["id"]),
+        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+        child: ListView.builder(
+          itemCount: user_list.length,
+          itemBuilder: (context, int index) {
+            return Column(
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Slidable(
                     actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: AssetImage(user_list[index]["img"]),
+                      ),
+                      title: Text(user_list[index]['name']),
+                      subtitle: Text(user_list[index]["line_name"]),
+                    ),
                     secondaryActions: <Widget>[
                       IconSlideAction(
                         caption: 'Edit',
@@ -61,17 +166,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         // onTap: () => _showSnackBar('Delete'),
                       ),
                     ],
-                    dismissal: SlidableDismissal(
-                      child: SlidableDrawerDismissal(),
-                    ),
-                    child: ListTile(
-                      leading:
-                          CircleAvatar(backgroundImage: AssetImage(e["img"])),
-                      title: Text(e["name"]),
-                      subtitle: Text(e["line_name"]),
-                    ),
-                  ))
-              .toList(),
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
