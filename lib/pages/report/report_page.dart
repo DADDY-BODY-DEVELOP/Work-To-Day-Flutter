@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:work_to_day/components/header/appber.dart';
 import './report_list_page.dart';
 
 class ReportPage extends StatelessWidget {
@@ -96,9 +97,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Report'),
-      ),
+
+      appBar: BaseAppBar(
+          title: Text('REPORT'),
+          appBar: AppBar(),
+        ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: ListView.builder(

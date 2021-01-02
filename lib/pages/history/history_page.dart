@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:work_to_day/components/header/appber.dart';
 // import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -105,9 +106,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('History'),
-      ),
+      appBar: BaseAppBar(
+          title: Text('HISTORY'),
+          appBar: AppBar(),
+        ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         height: MediaQuery.of(context).size.height,

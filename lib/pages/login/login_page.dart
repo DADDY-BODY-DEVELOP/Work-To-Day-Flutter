@@ -120,8 +120,9 @@ class _LoginState extends State<Login> {
       sharedPreferences.setString('image', image);
       sharedPreferences.setString('team', team);
     });
-    MaterialPageRoute route = MaterialPageRoute(builder: (ctx) => HomeScreen());
-    Navigator.pushAndRemoveUntil(context, route, (route) => false);
+
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen()));
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:work_to_day/components/header/appber.dart';
 
 class UserAddPage extends StatelessWidget {
   @override
@@ -105,6 +106,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: BaseAppBar(
+          title: Text('USER ADD'),
+          appBar: AppBar(),
+        ),
       body: Container(
         color: Colors.white,
         alignment: Alignment.center,

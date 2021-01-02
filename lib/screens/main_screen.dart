@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:work_to_day/screens/home_screen.dart';
 
 import '../pages/checkin/check_in_page.dart';
 import '../pages/profile/profile_page.dart';
 import '../pages/history/history_page.dart';
 import '../pages/user/user_page.dart';
 import '../pages/report/report_page.dart';
+import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -22,13 +22,6 @@ class _MainScreenState extends State<MainScreen> {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>()
   ];
-  Future logoutPage() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.clear();
-
-    MaterialPageRoute route = MaterialPageRoute(builder: (ctx) => HomeScreen());
-    await Navigator.pushAndRemoveUntil(context, route, (route) => false);
-  }
 
   final nameTitleBar = ['CHECK IN', 'PROFILE', 'HISTORY', 'USER', 'REPORT'];
   @override
@@ -42,6 +35,13 @@ class _MainScreenState extends State<MainScreen> {
         },
         child: Scaffold(
           backgroundColor: Colors.black,
+          floatingActionButton: FloatingActionButton(
+            mini: true,
+            onPressed: () => _logoutNavigate(context),
+            child: Icon(Icons.logout),
+            backgroundColor: Colors.blue,
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedIndex,
             showSelectedLabels: false,
@@ -103,15 +103,6 @@ class _MainScreenState extends State<MainScreen> {
               });
             },
           ),
-          appBar: AppBar(
-            title: Text(nameTitleBar[_selectedIndex]),
-            actions: [
-              ElevatedButton(
-                child: Icon(Icons.exit_to_app),
-                onPressed: logoutPage,
-              ),
-            ],
-          ),
           body: Stack(
             children: [
               _buildOffstageNavigator(0),
@@ -122,6 +113,13 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ));
+  }
+
+  Future _logoutNavigate(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
+    MaterialPageRoute route = MaterialPageRoute(builder: (ctx) => HomeScreen());
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {

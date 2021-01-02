@@ -7,9 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_to_day/components/header/appber.dart';
-import 'package:work_to_day/pages/checkout/check_out_page.dart';
+import 'package:work_to_day/pages/checkin/check_in_page.dart';
 
-class CheckInPage extends StatelessWidget {
+class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       });
       print(response.data);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => CheckOutPage()),
+        MaterialPageRoute(builder: (BuildContext context) => CheckInPage()),
       );
     } catch (e) {
       print(e);
@@ -124,7 +124,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   Widget routerAfterPhoto() => Container(
         child: Material(
-          color: Colors.blue, // button color
+          color: Colors.amber, // button color
           child: checkImage(),
         ),
       );
@@ -141,11 +141,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Icon(
             Icons.camera_alt,
             size: 100,
-            color: Colors.white,
           ), // icon
           Text(
-            "CHECK IN",
-            style: TextStyle(fontSize: 40, color: Colors.white),
+            "CHECK OUT",
+            style: TextStyle(fontSize: 40),
           ), // text
         ],
       );
@@ -154,7 +153,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-          title: Text('CHECK IN'),
+          title: Text('CHECK OUT'),
           appBar: AppBar(),
         ),
       body: Center(

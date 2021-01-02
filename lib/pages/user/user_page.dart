@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:work_to_day/components/header/appber.dart';
 import './user_add_page.dart';
 import './user_edit_page.dart';
 
@@ -127,6 +128,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ];
 
     return Scaffold(
+      appBar: BaseAppBar(
+          title: Text('USER'),
+          appBar: AppBar(),
+        ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: ListView.builder(
