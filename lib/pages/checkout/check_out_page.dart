@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
       // print(img64);
       Response response =
-          await Dio().post("http://178.128.215.172/api/checkin", data: {
+          await Dio().post("http://sixty-six-develop.tech/api/work-to-day/api/checkin", data: {
         "userId": "5fee3014e2ebb0f5ccdab75f",
         "image": img64,
         "location": "123",
