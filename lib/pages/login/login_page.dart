@@ -48,7 +48,7 @@ class _LoginState extends State<Login> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().post(
-        "http://sixty-six-develop.tech/api/work-to-day/api/login",
+        "http://api.sixty-six-develop.tech/login",
         data: {"username": username, "password": password},
       );
       print(response);
@@ -114,6 +114,7 @@ class _LoginState extends State<Login> {
     setState(() {
       sharedPreferences.setString('userID', userID);
       sharedPreferences.setString('username', username);
+      sharedPreferences.setString('password', password);
       sharedPreferences.setString('status', status);
       sharedPreferences.setString('name', name);
       sharedPreferences.setString('linename', linename);

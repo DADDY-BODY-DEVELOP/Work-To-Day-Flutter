@@ -56,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
       // print(img64);
       Response response =
-          await Dio().post("http://sixty-six-develop.tech/api/work-to-day/api/checkin", data: {
+          await Dio().post("http://api.sixty-six-develop.tech/checkin", data: {
         "userId": "5fee3014e2ebb0f5ccdab75f",
         "image": img64,
         "location": "123",
@@ -75,8 +75,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera,
         preferredCameraDevice: CameraDevice.front,
-        maxHeight: 300.0,
-        maxWidth: 300.0,
+        maxHeight: 400.0,
+        maxWidth: 400.0,
         imageQuality: 90);
 
     setState(() {

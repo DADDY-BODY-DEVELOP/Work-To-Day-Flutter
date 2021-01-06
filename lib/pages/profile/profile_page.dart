@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_to_day/components/header/appber.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -30,7 +32,112 @@ class MyStatefulWidget extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   File _image;
+  String username;
+  String password;
+  String status;
+  String name;
+  String linename;
+  String team;
+  String image;
+  String statusFlag;
+  String workShiftID;
+  String createBy;
+  String updateBy;
+  String userID;
+
+  int errorCode;
+  String errorMsg;
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
+  TextEditingController nicknameController = TextEditingController();
+  TextEditingController linenameController = TextEditingController();
+  TextEditingController workShiftController = TextEditingController();
+
   final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    checkPrereferences();
+    workShiftController = TextEditingController(text: 'starValue');
+    _getValue();
+  }
+
+  Future<Null> checkPrereferences() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        userID = preferences.getString('userID');
+        password = preferences.getString('password');
+      });
+      print(userID);
+
+      try {
+        Dio().options.contentType = Headers.formUrlEncodedContentType;
+        Response response =
+            await Dio().get("http://api.sixty-six-develop.tech/user/$userID");
+        // print(response.data["data"]);
+        setState(() {
+          usernameController.text = response.data["data"]["username"];
+          passwordController.text = password;
+          status = response.data["data"]["status"];
+          nicknameController.text = response.data["data"]["name"];
+          linenameController.text = response.data["data"]["linename"];
+          team = response.data["data"]["team"];
+          image = response.data["data"]["image"];
+          statusFlag = response.data["data"]["statusFlag"];
+          workShiftController.text = response.data["data"]["workShiftID"];
+          createBy = response.data["data"]["createdBy"];
+          updateBy = response.data["data"]["updatedBy"];
+        });
+      } on DioError catch (e) {
+        if (e.response.statusCode == 404) {
+          print(e.response);
+          print(e.response.statusCode);
+          setState(() {
+            errorCode = e.response.statusCode;
+            errorMsg = e.response.statusMessage;
+          });
+        } else {
+          print(e.response.data["message"]);
+          setState(() {
+            errorCode = e.response.statusCode;
+            errorMsg = e.response.data["message"];
+          });
+        }
+        await _showMyDialog();
+      }
+    } catch (e) {}
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(errorCode.toString()),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(errorMsg),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Future getImage() async {
     final pickedFile = await picker.getImage(
@@ -50,30 +157,51 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     final bytes = File(_image.path).readAsBytesSync();
     String img64 = base64Encode(bytes);
+    updateUser(img64);
+  }
 
-    var url = 'http://192.168.1.23:9000/api/user';
-    var response = await http.post(url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          "username": "warayut.ta",
-          "password": "abc@123",
-          "status": "ADMIN",
-          "name": "warayut",
-          "linename": "taekrathok",
-          "team": "CHUN",
-          "image": "$img64",
-          "statusFlag": "A",
-          "createdBy": "000000000000000000000000",
-          "updatedBy": "000000000000000000000000"
-        }));
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  updateUser(imagesData) async {
+    try {
+      Dio().options.contentType = Headers.formUrlEncodedContentType;
+      Response response = await Dio()
+          .put("http://api.sixty-six-develop.tech/user/$userID", data: {
+        "username": usernameController.text,
+        "password": passwordController.text,
+        "status": status,
+        "name": nicknameController.text,
+        "linename": linenameController.text,
+        "team": team,
+        "workShiftID": workShiftController.text,
+        "image": imagesData,
+        "statusFlag": statusFlag,
+        "createdBy": userID,
+        "updatedBy": userID
+      });
+      setState(() {
+        errorCode = response.statusCode;
+        errorMsg = response.data["message"];
+      });
+      await _showMyDialog();
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        print(e.response);
+        print(e.response.statusCode);
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.statusMessage;
+        });
+      } else {
+        print(e.response.data["message"]);
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.data["message"];
+        });
+      }
+      await _showMyDialog();
+    }
   }
 
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
-  TextEditingController _controller;
 
   String _valueChanged = '';
   String _valueToValidate = '';
@@ -87,33 +215,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'icon': Icon(Icons.stop),
     },
     {
-      'value': 'Dong',
-      'label': 'ทีม Dong',
+      'value': '5fc3c171f4877e1c38aeede1',
+      'label': 'ทีม CHUN',
       'icon': Icon(Icons.stop),
     },
     {
-      'value': 'Jeeb',
+      'value': '5fc3c373f4877e1c38aeede2',
       'label': 'ทีม Jeeb',
       'icon': Icon(Icons.stop),
     },
     {
-      'value': 'Tae',
+      'value': '5fc3c4f7f4877e1c38aeedea',
       'label': 'ทีม Tae',
       'icon': Icon(Icons.stop),
     },
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: 'starValue');
-    _getValue();
-  }
-
   Future<void> _getValue() async {
     await Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        _controller.text = 'circleValue';
+        workShiftController.text = workShiftID;
       });
     });
   }
@@ -122,9 +243,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-          title: Text('PROFILE'),
-          appBar: AppBar(),
-        ),
+        title: Text('PROFILE'),
+        appBar: AppBar(),
+      ),
       body: Container(
         color: Colors.white,
         alignment: Alignment.center,
@@ -148,6 +269,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: usernameController,
                     decoration: const InputDecoration(
                       filled: true,
                       // icon: Icon(FontAwesomeIcons.person),
@@ -158,6 +280,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: passwordController,
                     decoration: const InputDecoration(
                       filled: true,
                       icon: Icon(Icons.lock),
@@ -168,6 +291,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: repasswordController,
                     decoration: const InputDecoration(
                       filled: true,
                       icon: Icon(Icons.lock),
@@ -178,6 +302,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: nicknameController,
                     decoration: const InputDecoration(
                       filled: true,
                       icon: Icon(Icons.folder_shared),
@@ -187,6 +312,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: linenameController,
                     decoration: const InputDecoration(
                       filled: true,
                       icon: Icon(Icons.person),
@@ -202,7 +328,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       hintText: "Name",
                     ),
-                    controller: _controller,
+                    controller: workShiftController,
                     labelText: 'Shape',
                     dialogTitle: 'Pick a item',
                     dialogCancelBtn: 'CANCEL',
@@ -229,6 +355,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       if (loForm.validate()) {
                         loForm.save();
+                        updateUser(image);
                       }
                     },
                     child: Text('Submit'),

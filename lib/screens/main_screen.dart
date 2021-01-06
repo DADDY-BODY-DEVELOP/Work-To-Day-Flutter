@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../pages/checkin/check_in_page.dart';
 import '../pages/profile/profile_page.dart';
 import '../pages/history/history_page.dart';
 import '../pages/user/user_page.dart';
 import '../pages/report/report_page.dart';
+import 'checkin_or_checkout.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -126,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
     return {
       '/': (context) {
         return [
-          CheckInPage(),
+          CheckinOrCheckout(),
           ProfilePage(),
           HistoryPage(),
           UserPage(),
