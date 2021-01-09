@@ -151,7 +151,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     final bytes = File(_image.path).readAsBytesSync();
     String img64 = base64Encode(bytes);
-    updateUser(img64);
+    updateUserImg(img64);
   }
 
   updateUser(imagesData) async {
@@ -159,7 +159,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio()
           .put("http://api.sixty-six-develop.tech/user/img/$userID", data: {
-        "image": imagesData
+        "username": usernameController.text,
+        "password": passwordController.text,
+        "status": status,
+        "name": nicknameController.text,
+        "linename": linenameController.text,
+        "workShiftID": workShiftController.text,
+        "image": imagesData,
+        "statusFlag": statusFlag,
+        "createdBy": userID,
+        "updatedBy": userID
       });
       setState(() {
         errorCode = response.statusCode;
@@ -167,6 +176,36 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       });
       await _showMyDialog();
     } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.statusMessage;
+        });
+      } else {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.data["message"];
+        });
+      }
+      await _showMyDialog();
+    }
+  }
+
+  updateUserImg(imagesData) async {
+    try {
+      Dio().options.contentType = Headers.formUrlEncodedContentType;
+      Response response = await Dio().put(
+          "http://api.sixty-six-develop.tech/user/img/$userID",
+          data: {"image": imagesData});
+      print(response);
+      setState(() {
+        errorCode = response.statusCode;
+        errorMsg = response.data["message"];
+      });
+      await _showMyDialog();
+    } on DioError catch (e) {
+      print(e.response);
+
       if (e.response.statusCode == 404) {
         setState(() {
           errorCode = e.response.statusCode;

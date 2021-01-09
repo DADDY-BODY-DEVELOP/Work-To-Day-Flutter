@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
   String name;
   String linename;
   String image;
-  String team;
+  String workShiftID;
   int errorCode;
   String errorMsg;
 
@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
         name = response.data["data"]["name"];
         linename = response.data["data"]["linename"];
         image = response.data["data"]["image"];
-        team = response.data["data"]["team"];
+        workShiftID = response.data["data"]["workShiftID"];
       });
       await loginSuccess();
     } on DioError catch (e) {
@@ -113,7 +113,7 @@ class _LoginState extends State<Login> {
       sharedPreferences.setString('name', name);
       sharedPreferences.setString('linename', linename);
       sharedPreferences.setString('image', image);
-      sharedPreferences.setString('team', team);
+      sharedPreferences.setString('workShiftID', workShiftID);
     });
 
     Navigator.of(context)

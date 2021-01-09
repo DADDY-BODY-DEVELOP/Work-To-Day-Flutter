@@ -30,6 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String userID;
+  String workShiftID;
   @override
   void initState() {
     super.initState();
@@ -41,6 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
         userID = preferences.getString('userID');
+        workShiftID = preferences.getString('workShiftID');
       });
     } catch (e) {}
   }
@@ -53,18 +55,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       final bytes = File(_image.path).readAsBytesSync();
       String img64 = base64Encode(bytes);
 
-      Response response =
-          await Dio().post("http://api.sixty-six-develop.tech/checkin", data: {
-        "userId": "5fee3014e2ebb0f5ccdab75f",
+      Response response = await Dio()
+          .post("http://api.sixty-six-develop.tech/checkin", data: {
+        "userId": userID,
         "image": img64,
         "location": "123",
-        "workShiftID": "5fc3c171f4877e1c38aeede1"
+        "workShiftID": workShiftID
       });
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => CheckInPage()),
       );
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   Future getImage() async {
@@ -147,9 +148,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-          title: Text('CHECK OUT'),
-          appBar: AppBar(),
-        ),
+        title: Text('CHECK OUT'),
+        appBar: AppBar(),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
