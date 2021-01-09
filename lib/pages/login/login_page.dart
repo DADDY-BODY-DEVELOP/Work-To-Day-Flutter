@@ -51,7 +51,6 @@ class _LoginState extends State<Login> {
         "http://api.sixty-six-develop.tech/login",
         data: {"username": username, "password": password},
       );
-      print(response);
       setState(() {
         userID = response.data["data"]["id"];
         status = response.data["data"]["status"];
@@ -63,21 +62,16 @@ class _LoginState extends State<Login> {
       await loginSuccess();
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
-        print(e.response);
-        print(e.response.statusCode);
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.statusMessage;
         });
       } else {
-        print(e.response.data["message"]);
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.data["message"];
         });
       }
-      print(username);
-      print(password);
       await _showMyDialog();
     }
   }

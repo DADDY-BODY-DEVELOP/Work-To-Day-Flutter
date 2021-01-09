@@ -73,7 +73,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         userID = preferences.getString('userID');
         password = preferences.getString('password');
       });
-      print(userID);
 
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
@@ -147,8 +146,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
       }
     });
 
@@ -161,17 +158,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio()
-          .put("http://api.sixty-six-develop.tech/user/$userID", data: {
-        "username": usernameController.text,
-        "password": passwordController.text,
-        "status": status,
-        "name": nicknameController.text,
-        "linename": linenameController.text,
-        "workShiftID": workShiftController.text,
-        "image": imagesData,
-        "statusFlag": statusFlag,
-        "createdBy": userID,
-        "updatedBy": userID
+          .put("http://api.sixty-six-develop.tech/user/img/$userID", data: {
+        "image": imagesData
       });
       setState(() {
         errorCode = response.statusCode;

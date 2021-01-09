@@ -42,7 +42,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       setState(() {
         userID = preferences.getString('userID');
       });
-      print(userID);
     } catch (e) {}
   }
 
@@ -61,12 +60,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         "location": "123",
         "workShiftID": "5fc3c171f4877e1c38aeede1"
       });
-      print(response.data);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => CheckOutPage()),
       );
     } catch (e) {
-      print(e);
+      
     }
   }
 
@@ -81,8 +79,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
       }
     });
 

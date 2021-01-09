@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         status = preferences.getString('status');
       });
-      print(status);
     } catch (e) {}
   }
 

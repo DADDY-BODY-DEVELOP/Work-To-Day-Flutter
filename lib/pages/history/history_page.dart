@@ -25,7 +25,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String userID;
   int errorCode;
   String errorMsg;
-  // final dateTime = DateTime.now().subtract(Duration(minutes: 5));
   @override
   void initState() {
     super.initState();
@@ -34,100 +33,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   Future<Map<String, dynamic>> getHistory() async {
     try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        userID = preferences.getString('userID');
+      });
+
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().get(
-        "http://api.sixty-six-develop.tech/checkin",
-      );
+          "http://api.sixty-six-develop.tech/checkin/history/$userID"
+        );
       setState(() {
         historyList = response.data['data'];
       });
-      print(historyList);
-
-      // print(dateTime.format());
-      // print(DateTimeFormat.format(dateTime));
-
-      // print(new DateFormat.yMMMd().format(new DateTime.now()));
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.statusMessage;
+          historyList = null;
         });
       } else {
-        print(e.response.data["message"]);
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.data["message"];
+          historyList = null;
         });
       }
-      await _showMyDialog();
     }
-  }
-
-  // Future serviceLogin() async {
-  //   try {
-  //     SharedPreferences preferences = await SharedPreferences.getInstance();
-  //     setState(() {
-  //       userID = preferences.getString('userID');
-  //     });
-  //     Dio().options.contentType = Headers.formUrlEncodedContentType;
-  //     Response response = await Dio().post(
-  //       "http://api.sixty-six-develop.tech/chheckin/history",
-  //       data: {
-  //         "userID": userID,
-  //       },
-  //     );
-  //     print("82");
-  //     print(response);
-  //   } on DioError catch (e) {
-  //     if (e.response.statusCode == 404) {
-  //       print(e.response);
-  //       print(e.response.statusCode);
-  //       setState(() {
-  //         errorCode = e.response.statusCode;
-  //         errorMsg = e.response.statusMessage;
-  //       });
-  //     } else {
-  //       print(e.response.data["message"]);
-  //       setState(() {
-  //         errorCode = e.response.statusCode;
-  //         errorMsg = e.response.data["message"];
-  //       });
-  //     }
-  //   }
-  // }
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(errorCode.toString()),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(errorMsg),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Widget build(BuildContext _history) {
     var assetName = 'http://api.sixty-six-develop.tech/images/user/';
-    print(DateTime.parse('2021-01-01T17:33:31+07:00'));
-    // print(DateTime('2021-01-01T17:33:31+07:00').format('d M Y, H:i:s'));
 
     return Scaffold(
       appBar: BaseAppBar(
@@ -137,12 +73,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         height: MediaQuery.of(context).size.height,
-        child: ListView.builder(
-          itemCount: historyList == null
+        child: historyList == null
               ? null
               : historyList.length == 0
                   ? null
-                  : historyList.length,
+                  : ListView.builder(
+          itemCount: historyList.length,
           itemBuilder: (context, int index) {
             return Container(
               child: Card(

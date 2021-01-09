@@ -43,8 +43,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
       }
     });
 
@@ -68,8 +66,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           "createdBy": "000000000000000000000000",
           "updatedBy": "000000000000000000000000"
         }));
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
   }
 
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
