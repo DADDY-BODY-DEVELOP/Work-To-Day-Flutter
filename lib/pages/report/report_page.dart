@@ -97,11 +97,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: BaseAppBar(
-          title: Text('REPORT'),
-          appBar: AppBar(),
-        ),
+        title: Text('REPORT'),
+        appBar: AppBar(),
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: ListView.builder(

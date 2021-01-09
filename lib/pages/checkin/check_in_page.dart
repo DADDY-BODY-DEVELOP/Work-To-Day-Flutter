@@ -54,15 +54,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       final bytes = File(_image.path).readAsBytesSync();
       String img64 = base64Encode(bytes);
 
-      // print(img64);
-      Response response = await Dio().post(
-          "http://api.sixty-six-develop.tech/checkin",
-          data: {
-            "userId": "5fee3014e2ebb0f5ccdab75f",
-            "image": img64,
-            "location": "123",
-            "workShiftID": "5fc3c171f4877e1c38aeede1"
-          });
+      Response response =
+          await Dio().post("http://api.sixty-six-develop.tech/checkin", data: {
+        "userId": "5fee3014e2ebb0f5ccdab75f",
+        "image": img64,
+        "location": "123",
+        "workShiftID": "5fc3c171f4877e1c38aeede1"
+      });
       print(response.data);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => CheckOutPage()),

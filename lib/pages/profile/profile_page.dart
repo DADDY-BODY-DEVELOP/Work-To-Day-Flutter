@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
@@ -30,14 +30,16 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  var assetName = 'http://api.sixty-six-develop.tech/images/user/';
+
   File _image;
   String username;
   String password;
   String status;
   String name;
   String linename;
-  String team;
-  String image;
+
+  String imageProfile;
   String statusFlag;
   String workShiftID;
   String createBy;
@@ -77,15 +79,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
         Response response =
             await Dio().get("http://api.sixty-six-develop.tech/user/$userID");
-        // print(response.data["data"]);
         setState(() {
           usernameController.text = response.data["data"]["username"];
           passwordController.text = password;
           status = response.data["data"]["status"];
           nicknameController.text = response.data["data"]["name"];
           linenameController.text = response.data["data"]["linename"];
-          team = response.data["data"]["team"];
-          image = response.data["data"]["image"];
+
+          imageProfile = response.data["data"]["image"];
           statusFlag = response.data["data"]["statusFlag"];
           workShiftController.text = response.data["data"]["workShiftID"];
           createBy = response.data["data"]["createdBy"];
@@ -93,14 +94,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         });
       } on DioError catch (e) {
         if (e.response.statusCode == 404) {
-          print(e.response);
-          print(e.response.statusCode);
           setState(() {
             errorCode = e.response.statusCode;
             errorMsg = e.response.statusMessage;
           });
         } else {
-          print(e.response.data["message"]);
           setState(() {
             errorCode = e.response.statusCode;
             errorMsg = e.response.data["message"];
@@ -169,7 +167,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         "status": status,
         "name": nicknameController.text,
         "linename": linenameController.text,
-        "team": team,
         "workShiftID": workShiftController.text,
         "image": imagesData,
         "statusFlag": statusFlag,
@@ -183,14 +180,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       await _showMyDialog();
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
-        print(e.response);
-        print(e.response.statusCode);
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.statusMessage;
         });
       } else {
-        print(e.response.data["message"]);
         setState(() {
           errorCode = e.response.statusCode;
           errorMsg = e.response.data["message"];
@@ -215,7 +209,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     },
     {
       'value': '5fc3c171f4877e1c38aeede1',
-      'label': 'ทีม CHUN',
+      'label': 'ทีม Doong',
       'icon': Icon(Icons.stop),
     },
     {
@@ -259,7 +253,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 children: [
                   SizedBox(height: 15),
                   _image == null
-                      ? Image(image: AssetImage('assets/image/test_view.jpg'))
+                      ? assetName + imageProfile == null
+                          ? Image(
+                              image: NetworkImage(assetName + 'default.png'))
+                          : Image(image: NetworkImage(assetName + imageProfile))
                       : Image.file(_image),
                   SizedBox(height: 15),
                   CupertinoButton.filled(
@@ -354,7 +351,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       if (loForm.validate()) {
                         loForm.save();
-                        updateUser(image);
+                        updateUser(imageProfile);
                       }
                     },
                     child: Text('Submit'),

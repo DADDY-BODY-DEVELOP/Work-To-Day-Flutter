@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:work_to_day/components/header/appber.dart';
@@ -19,123 +20,85 @@ class MyStatefulWidget extends StatefulWidget {
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  List userList;
+  int errorCode;
+  String errorMsg;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<Map<String, dynamic>> getData() async {
+    try {
+      Dio().options.contentType = Headers.formUrlEncodedContentType;
+      Response response = await Dio().get(
+        "http://api.sixty-six-develop.tech/user",
+      );
+      setState(() {
+        userList = response.data['data'];
+      });
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.statusMessage;
+        });
+      } else {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.data["message"];
+        });
+      }
+      await _showMyDialog();
+    }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(errorCode.toString()),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(errorMsg),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
-    const user_list = [
-      {
-        'id': '1',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'ไก่',
-        'line_name': 'AOT',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-      {
-        'id': '2',
-        'img': 'assets/image/test_view.jpg',
-        'name': 'หนอน',
-        'line_name': 'PRA',
-      },
-    ];
+    var assetName = 'http://api.sixty-six-develop.tech/images/user/';
 
     return Scaffold(
       appBar: BaseAppBar(
-          title: Text('USER'),
-          appBar: AppBar(),
-        ),
+        title: Text('USER'),
+        appBar: AppBar(),
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
         child: ListView.builder(
-          itemCount: user_list.length,
+          itemCount: userList == null
+              ? null
+              : userList.length == 0
+                  ? null
+                  : userList.length,
           itemBuilder: (context, int index) {
             return Column(
               children: [
@@ -148,10 +111,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     actionExtentRatio: 0.25,
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage(user_list[index]["img"]),
+                        backgroundImage: NetworkImage(
+                            userList[index]['image'] == []
+                                ? assetName + 'default.png'
+                                : assetName + userList[index]['image']),
                       ),
-                      title: Text(user_list[index]['name']),
-                      subtitle: Text(user_list[index]["line_name"]),
+                      title: Text(userList[index]['username']),
+                      subtitle: Text(userList[index]['linename']),
                     ),
                     secondaryActions: <Widget>[
                       IconSlideAction(
@@ -163,6 +129,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           MaterialPageRoute(
                               builder: (context) => UserEditPage()),
                         ),
+                      ),
+                      IconSlideAction(
+                        caption: 'Re Pass',
+                        color: Colors.grey.shade200,
+                        icon: Icons.lock_open,
+                        onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => UserEditPage(
+                          //         userID: userList[index]['index']),
+                          //   ),
+                          // );
+                        },
                       ),
                       IconSlideAction(
                         caption: 'Delete',
@@ -178,6 +158,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => UserAddPage()),
+        ),
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterTop,
     );
   }
 }
