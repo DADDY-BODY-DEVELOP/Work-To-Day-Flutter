@@ -14,6 +14,23 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  String status;
+  @override
+  void initState() {
+    super.initState();
+    checkPrereferences();
+  }
+
+  Future<Null> checkPrereferences() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        status = preferences.getString('status');
+      });
+      print(status);
+    } catch (e) {}
+  }
+
   int _selectedIndex = 0;
   List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
@@ -46,56 +63,90 @@ class _MainScreenState extends State<MainScreen> {
             currentIndex: _selectedIndex,
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.location_on,
-                  color: Colors.black,
-                ),
-                label: 'Location',
-                activeIcon: Icon(
-                  Icons.location_on,
-                  size: 36,
-                ),
-              ),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  label: 'Profile',
-                  activeIcon: Icon(
-                    Icons.person,
-                    size: 36,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.history,
-                    color: Colors.black,
-                  ),
-                  label: 'History',
-                  activeIcon: Icon(
-                    Icons.history,
-                    size: 36,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.supervisor_account,
-                    color: Colors.black,
-                  ),
-                  label: 'User',
-                  activeIcon: Icon(
-                    Icons.supervisor_account,
-                    size: 36,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.list_alt, color: Colors.black),
-                  label: 'Report',
-                  activeIcon: Icon(
-                    Icons.list_alt,
-                    size: 36,
-                  )),
-            ],
+            items: status != 'ADMIN'
+                ? <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.photo_camera_front,
+                        color: Colors.black,
+                      ),
+                      label: 'CAMERA',
+                      activeIcon: Icon(
+                        Icons.photo_camera_front,
+                        size: 36,
+                      ),
+                    ),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
+                        label: 'PROFILE',
+                        activeIcon: Icon(
+                          Icons.person,
+                          size: 36,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.history,
+                          color: Colors.black,
+                        ),
+                        label: 'HISTORY',
+                        activeIcon: Icon(
+                          Icons.history,
+                          size: 36,
+                        )),
+                  ]
+                : const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.photo_camera_front,
+                        color: Colors.black,
+                      ),
+                      label: 'CAMERA',
+                      activeIcon: Icon(
+                        Icons.photo_camera_front,
+                        size: 36,
+                      ),
+                    ),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
+                        label: 'PROFILE',
+                        activeIcon: Icon(
+                          Icons.person,
+                          size: 36,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.history,
+                          color: Colors.black,
+                        ),
+                        label: 'HISTORY',
+                        activeIcon: Icon(
+                          Icons.history,
+                          size: 36,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.supervisor_account,
+                          color: Colors.black,
+                        ),
+                        label: 'USER',
+                        activeIcon: Icon(
+                          Icons.supervisor_account,
+                          size: 36,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.list_alt, color: Colors.black),
+                        label: 'REPORT',
+                        activeIcon: Icon(
+                          Icons.list_alt,
+                          size: 36,
+                        )),
+                  ],
             selectedItemColor: Colors.amber[800],
             onTap: (index) {
               setState(() {

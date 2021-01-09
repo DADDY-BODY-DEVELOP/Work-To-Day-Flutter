@@ -7,7 +7,6 @@ import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/cupertino.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_to_day/components/header/appber.dart';
 
