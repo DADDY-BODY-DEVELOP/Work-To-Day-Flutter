@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
@@ -30,7 +29,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var assetName = 'http://api.sixty-six-develop.tech/images/user/';
+  var assetName = 'http://api.sixty-six-develop.tech/images/userProfile/';
 
   File _image;
   String username;
@@ -61,6 +60,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   void initState() {
     super.initState();
+    initValue();
+  }
+
+  initValue() async {
     checkPrereferences();
     workShiftController = TextEditingController(text: 'starValue');
     _getValue();
@@ -73,7 +76,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         userID = preferences.getString('userID');
         password = preferences.getString('password');
       });
-      print(userID);
 
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
@@ -128,6 +130,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
+                initValue();
               },
             ),
           ],
@@ -147,14 +150,39 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
       }
     });
 
     final bytes = File(_image.path).readAsBytesSync();
     String img64 = base64Encode(bytes);
-    updateUser(img64);
+    updateUserImg(img64);
+  }
+
+  updateUserImg(imagesData) async {
+    try {
+      Dio().options.contentType = Headers.formUrlEncodedContentType;
+      Response response = await Dio().put(
+          "http://api.sixty-six-develop.tech/user/img/$userID",
+          data: {"image": imagesData});
+      setState(() {
+        errorCode = response.statusCode;
+        errorMsg = response.data["message"];
+      });
+      await _showMyDialog();
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.statusMessage;
+        });
+      } else {
+        setState(() {
+          errorCode = e.response.statusCode;
+          errorMsg = e.response.data["message"];
+        });
+      }
+      await _showMyDialog();
+    }
   }
 
   updateUser(imagesData) async {
@@ -167,6 +195,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         "status": status,
         "name": nicknameController.text,
         "linename": linenameController.text,
+        "team": workShiftController.text,
         "workShiftID": workShiftController.text,
         "image": imagesData,
         "statusFlag": statusFlag,
@@ -209,17 +238,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     },
     {
       'value': '5fc3c171f4877e1c38aeede1',
-      'label': 'ทีม Doong',
+      'label': 'กะเช้า',
       'icon': Icon(Icons.stop),
     },
     {
       'value': '5fc3c373f4877e1c38aeede2',
-      'label': 'ทีม Jeeb',
+      'label': 'กะเที่ยง',
       'icon': Icon(Icons.stop),
     },
     {
       'value': '5fc3c4f7f4877e1c38aeedea',
-      'label': 'ทีม Tae',
+      'label': 'กะดึก',
       'icon': Icon(Icons.stop),
     },
   ];
@@ -287,17 +316,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    controller: repasswordController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      icon: Icon(Icons.lock),
-                      labelText: 'Confilm Password *',
-                      hintText: 'Password',
-                    ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
                     controller: nicknameController,
                     decoration: const InputDecoration(
                       filled: true,
@@ -339,19 +357,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     onSaved: (val) => setState(() => _valueSaved = val),
                   ),
                   SizedBox(height: 15),
-                  SelectableText(_valueChanged),
-                  SizedBox(height: 15),
-                  SelectableText(_valueToValidate),
-                  SizedBox(height: 15),
-                  SelectableText(_valueSaved),
-                  SizedBox(height: 15),
                   RaisedButton(
                     onPressed: () {
                       final loForm = _oFormKey.currentState;
 
                       if (loForm.validate()) {
-                        loForm.save();
                         updateUser(imageProfile);
+                        loForm.save();
                       }
                     },
                     child: Text('Submit'),

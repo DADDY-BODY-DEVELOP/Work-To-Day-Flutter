@@ -26,15 +26,13 @@ class _CheckinOrCheckoutState extends State<CheckinOrCheckout> {
       setState(() {
         userID = preferences.getString('userID');
       });
-      print(userID);
 
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
-        Response response = await Dio().post(
+        await Dio().post(
           "http://api.sixty-six-develop.tech/checkin/check",
           data: {"userId": userID},
         );
-        print("response");
         setState(() {
           resCode = 1;
         });

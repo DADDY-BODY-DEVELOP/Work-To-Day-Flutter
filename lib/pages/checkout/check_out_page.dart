@@ -30,6 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String userID;
+  String workShiftID;
   @override
   void initState() {
     super.initState();
@@ -41,8 +42,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
         userID = preferences.getString('userID');
+        workShiftID = preferences.getString('workShiftID');
       });
-      print(userID);
+      // print(userID);
     } catch (e) {}
   }
 
@@ -54,15 +56,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       final bytes = File(_image.path).readAsBytesSync();
       String img64 = base64Encode(bytes);
 
-      // print(img64);
-      Response response =
-          await Dio().post("http://api.sixty-six-develop.tech/checkin", data: {
-        "userId": "5fee3014e2ebb0f5ccdab75f",
+      Response response = await Dio()
+          .post("http://api.sixty-six-develop.tech/checkin", data: {
+        "userId": userID,
         "image": img64,
         "location": "123",
-        "workShiftID": "5fc3c171f4877e1c38aeede1"
+        "workShiftID": workShiftID
       });
-      print(response.data);
+      // print(response.data);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => CheckInPage()),
       );
@@ -75,8 +76,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     final pickedFile = await picker.getImage(
         source: ImageSource.camera,
         preferredCameraDevice: CameraDevice.front,
-        maxHeight: 400.0,
-        maxWidth: 400.0,
+        maxHeight: 350.0,
+        maxWidth: 350.0,
         imageQuality: 90);
 
     setState(() {

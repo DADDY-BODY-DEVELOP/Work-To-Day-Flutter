@@ -14,7 +14,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String status;
+  String status = "USER";
   @override
   void initState() {
     super.initState();
@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         status = preferences.getString('status');
       });
-      print(status);
     } catch (e) {}
   }
 
@@ -169,8 +168,7 @@ class _MainScreenState extends State<MainScreen> {
   Future _logoutNavigate(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();
-    MaterialPageRoute route = MaterialPageRoute(builder: (ctx) => HomeScreen());
-    Navigator.pushAndRemoveUntil(context, route, (route) => false);
+    await Navigator.push(context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {

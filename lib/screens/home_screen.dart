@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         userID = preferences.getString('userID');
       });
-      print(userID);
     } catch (e) {}
   }
 
