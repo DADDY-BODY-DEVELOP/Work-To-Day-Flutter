@@ -35,7 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().get(
-        "http://api.sixty-six-develop.tech/user",
+        "http://167.99.68.225:6001/api/user",
       );
       setState(() {
         userList = response.data['data'];
@@ -84,7 +84,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   Widget build(BuildContext context) {
-    var assetName = 'http://api.sixty-six-develop.tech/images/user/';
+    var assetName = 'http://167.99.68.225:6001/api/images/user/';
 
     return Scaffold(
       appBar: BaseAppBar(

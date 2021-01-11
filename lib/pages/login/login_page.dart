@@ -48,7 +48,7 @@ class _LoginState extends State<Login> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().post(
-        "http://api.sixty-six-develop.tech/login",
+        "http://167.99.68.225:6001/api/login",
         data: {"username": username, "password": password},
       );
       setState(() {

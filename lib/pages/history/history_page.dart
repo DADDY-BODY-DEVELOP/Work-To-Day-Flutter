@@ -42,7 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio()
-          .get("http://api.sixty-six-develop.tech/checkin/history/$userID");
+          .get("http://167.99.68.225:6001/api/checkin/history/$userID");
       setState(() {
         historyList = response.data['data'];
       });
@@ -64,7 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   Widget build(BuildContext _history) {
-    var assetName = 'http://api.sixty-six-develop.tech/images/checkin/';
+    var assetName = 'http://167.99.68.225:6001/api/images/checkin/';
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('HISTORY'),

@@ -29,7 +29,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var assetName = 'http://api.sixty-six-develop.tech/images/userProfile/';
+  var assetName = 'http://167.99.68.225:6001/api/images/userProfile/';
 
   File _image;
   String username;
@@ -80,7 +80,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
         Response response =
-            await Dio().get("http://api.sixty-six-develop.tech/user/$userID");
+            await Dio().get("http://167.99.68.225:6001/api/user/$userID");
         setState(() {
           usernameController.text = response.data["data"]["username"];
           passwordController.text = password;
@@ -162,7 +162,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().put(
-          "http://api.sixty-six-develop.tech/user/img/$userID",
+          "http://167.99.68.225:6001/api/user/img/$userID",
           data: {"image": imagesData});
       setState(() {
         errorCode = response.statusCode;
@@ -189,7 +189,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio()
-          .put("http://api.sixty-six-develop.tech/user/$userID", data: {
+          .put("http://167.99.68.225:6001/api/user/$userID", data: {
         "username": usernameController.text,
         "password": passwordController.text,
         "status": status,

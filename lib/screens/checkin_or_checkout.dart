@@ -30,7 +30,7 @@ class _CheckinOrCheckoutState extends State<CheckinOrCheckout> {
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
         await Dio().post(
-          "http://api.sixty-six-develop.tech/checkin/check",
+          "http://167.99.68.225:6001/api/checkin/check",
           data: {"userId": userID},
         );
         setState(() {
