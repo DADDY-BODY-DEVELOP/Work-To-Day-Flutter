@@ -19,8 +19,8 @@ class _LoginState extends State<Login> {
   String linename;
   String image;
   String workShiftID;
-  int errorCode;
-  String errorMsg;
+  var errorCode;
+  var errorMsg;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
