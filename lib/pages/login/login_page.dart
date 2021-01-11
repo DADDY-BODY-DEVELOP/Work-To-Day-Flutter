@@ -61,17 +61,17 @@ class _LoginState extends State<Login> {
       });
       await loginSuccess();
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.statusMessage;
-        });
-      } else {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.data["message"];
-        });
-      }
+      // if (e.response.statusCode == 404) {
+      setState(() {
+        errorCode = e.response.statusCode;
+        errorMsg = e.response.statusMessage;
+      });
+      // } else {
+      //   setState(() {
+      //     errorCode = e.response.statusCode;
+      //     errorMsg = e.response.data["message"];
+      //   });
+      // }
       await _showMyDialog();
     }
   }
