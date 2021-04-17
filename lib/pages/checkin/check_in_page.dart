@@ -57,7 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       String img64 = base64Encode(bytes);
 
       Response response = await Dio()
-          .post("http://167.99.68.225:6001/api/checkin", data: {
+          .post("https://work-to-day-service.herokuapp.com/api/checkin", data: {
         "userId": userID,
         "image": img64,
         "location": "123",
