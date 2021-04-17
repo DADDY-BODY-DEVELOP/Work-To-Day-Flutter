@@ -29,7 +29,8 @@ class MyStatefulWidget extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var assetName = 'http://api.sixty-six-develop.tech/images/userProfile/';
+  var assetName =
+      'https://work-to-day-service.herokuapp.com/api/images/userProfile/';
 
   File _image;
   String username;
@@ -79,8 +80,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
       try {
         Dio().options.contentType = Headers.formUrlEncodedContentType;
-        Response response =
-            await Dio().get("http://api.sixty-six-develop.tech/user/$userID");
+        Response response = await Dio()
+            .get("https://work-to-day-service.herokuapp.com/api/user/$userID");
         setState(() {
           usernameController.text = response.data["data"]["username"];
           passwordController.text = password;
@@ -162,7 +163,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
       Response response = await Dio().put(
-          "http://api.sixty-six-develop.tech/user/img/$userID",
+          "https://work-to-day-service.herokuapp.com/api/user/img/$userID",
           data: {"image": imagesData});
       setState(() {
         errorCode = response.statusCode;
@@ -188,20 +189,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   updateUser(imagesData) async {
     try {
       Dio().options.contentType = Headers.formUrlEncodedContentType;
-      Response response = await Dio()
-          .put("http://api.sixty-six-develop.tech/user/$userID", data: {
-        "username": usernameController.text,
-        "password": passwordController.text,
-        "status": status,
-        "name": nicknameController.text,
-        "linename": linenameController.text,
-        "team": workShiftController.text,
-        "workShiftID": workShiftController.text,
-        "image": imagesData,
-        "statusFlag": statusFlag,
-        "createdBy": userID,
-        "updatedBy": userID
-      });
+      Response response = await Dio().put(
+          "https://work-to-day-service.herokuapp.com/api/user/$userID",
+          data: {
+            "username": usernameController.text,
+            "password": passwordController.text,
+            "status": status,
+            "name": nicknameController.text,
+            "linename": linenameController.text,
+            "team": workShiftController.text,
+            "workShiftID": workShiftController.text,
+            "image": imagesData,
+            "statusFlag": statusFlag,
+            "createdBy": userID,
+            "updatedBy": userID
+          });
       setState(() {
         errorCode = response.statusCode;
         errorMsg = response.data["message"];

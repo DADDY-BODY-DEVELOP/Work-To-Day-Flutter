@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:date_time_format/date_time_format.dart';
 
 import 'package:intl/intl.dart';
+
 class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,8 +42,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       });
 
       Dio().options.contentType = Headers.formUrlEncodedContentType;
-      Response response = await Dio()
-          .get("http://api.sixty-six-develop.tech/checkin/history/$userID");
+      Response response = await Dio().get(
+          "https://work-to-day-service.herokuapp.com/api/checkin/history/$userID");
       setState(() {
         historyList = response.data['data'];
       });
@@ -64,7 +65,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   Widget build(BuildContext _history) {
-    var assetName = 'http://api.sixty-six-develop.tech/images/checkin/';
+    var assetName =
+        'https://work-to-day-service.herokuapp.com/api/images/checkin/';
     return Scaffold(
       appBar: BaseAppBar(
         title: Text('HISTORY'),
@@ -123,12 +125,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(DateTime.parse(
-                                          historyList[index]['checkIn']).toLocal()
+                                          historyList[index]['checkIn'])
+                                      .toLocal()
                                       .format('d M Y')),
                                   Text(
                                     'เข้างาน ' +
                                         DateTime.parse(
-                                                historyList[index]['checkIn']).toLocal()
+                                                historyList[index]['checkIn'])
+                                            .toLocal()
                                             .format('H:i:s'),
                                   ),
                                   Text(
@@ -136,7 +140,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         ? 'ออกงาน --:--:--'
                                         : 'ออกงาน ' +
                                             DateTime.parse(historyList[index]
-                                                    ['checkOut']).toLocal()
+                                                    ['checkOut'])
+                                                .toLocal()
                                                 .format('H:i:s')
                                                 .toString(),
                                   ),

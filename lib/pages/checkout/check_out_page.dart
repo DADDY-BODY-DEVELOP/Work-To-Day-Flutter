@@ -57,7 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       String img64 = base64Encode(bytes);
 
       Response response = await Dio()
-          .post("http://api.sixty-six-develop.tech/checkin", data: {
+          .post("https://work-to-day-service.herokuapp.com/api/checkin", data: {
         "userId": userID,
         "image": img64,
         "location": "123",
@@ -154,9 +154,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-          title: Text('CHECK OUT'),
-          appBar: AppBar(),
-        ),
+        title: Text('CHECK OUT'),
+        appBar: AppBar(),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

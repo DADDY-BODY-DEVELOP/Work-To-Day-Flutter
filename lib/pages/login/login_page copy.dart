@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:work_to_day/custom/dialogs.dart';
 import 'package:work_to_day/screens/home_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 class Login extends StatefulWidget {
   @override
@@ -48,34 +50,46 @@ class _LoginState extends State<Login> {
 
   Future serviceLogin() async {
     try {
-      Dio().options.contentType = Headers.formUrlEncodedContentType;
-      Response response = await Dio().post(
-        "https://work-to-day-service.herokuapp.com/api/login",
-        data: {"username": username, "password": password},
-      );
-      setState(() {
-        userID = response.data["data"]["id"];
-        status = response.data["data"]["status"];
-        name = response.data["data"]["name"];
-        linename = response.data["data"]["linename"];
-        image = response.data["data"]["image"];
-        workShiftID = response.data["data"]["workShiftID"];
-      });
-      await loginSuccess();
-    } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.statusMessage;
-        });
+      var url =
+          Uri.parse('https://work-to-day-service.herokuapp.com/api/login');
+      final response = await http.post(url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: convert.jsonEncode(
+              <String, String>{'username': username, 'password': password}));
+      print('object');
+      String logResponse = response.statusCode.toString();
+      if (response.statusCode == 200) {
+        print('ResponseStatusCode: $logResponse'); // Check Status Code = 200
+        print('ResponseBody: ' + response.body); // Read Data in Array
+        // await sharedPreferences.setString('userData', response.body);
+        // List<dynamic> responseJson = convert.json.decode(response.body);
       } else {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.data["message"];
-        });
+        throw Exception('error :(');
       }
-      await _showMyDialog();
-      Navigator.of(context).pop();
+      // setState(() {
+      //   userID = response.data["data"]["id"];
+      //   status = response.data["data"]["status"];
+      //   name = response.data["data"]["name"];
+      //   linename = response.data["data"]["linename"];
+      //   image = response.data["data"]["image"];
+      //   workShiftID = response.data["data"]["workShiftID"];
+      // });
+      // await loginSuccess();
+    } catch (e) {
+      // if (e.response.statusCode == 404) {
+      //   setState(() {
+      //     errorCode = e.response.statusCode;
+      //     errorMsg = e.response.statusMessage;
+      //   });
+      // } else {
+      //   setState(() {
+      //     errorCode = e.response.statusCode;
+      //     errorMsg = e.response.data["message"];
+      //   });
+      // }
+      // await _showMyDialog();
     }
   }
 
