@@ -31,6 +31,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String userID;
   String workShiftID;
+  bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -53,6 +54,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   void getHttp() async {
     try {
+      setState(() {
+        loading = true;
+      });
       final bytes = File(_image.path).readAsBytesSync();
       String img64 = base64Encode(bytes);
 
@@ -62,6 +66,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         "image": img64,
         "location": "123",
         "workShiftID": workShiftID
+      });
+      setState(() {
+        loading = false;
       });
       // print(response.data);
       Navigator.of(context).pushReplacement(
@@ -150,6 +157,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
       );
 
+  Widget loadingAfterPhoto() => Container(
+        child: Material(
+          color: Colors.green, // button color
+          child: InkWell(
+            splashColor: Colors.white, // splash color
+            onTap: () => {},
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.camera_alt,
+                  size: 100,
+                  color: Colors.white,
+                ), // icon
+                Text(
+                  "รอสักครู่",
+                  style: TextStyle(fontSize: 40, color: Colors.white),
+                ), // text
+              ],
+            ),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,7 +194,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: <Widget>[
             SizedBox.fromSize(
               size: Size(300, 300), // button width and height
-              child: ClipOval(child: routerAfterPhoto()),
+              child: ClipOval(
+                child:
+                    loading == false ? routerAfterPhoto() : loadingAfterPhoto(),
+              ),
             ),
           ],
         ),
