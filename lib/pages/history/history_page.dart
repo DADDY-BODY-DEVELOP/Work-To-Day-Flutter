@@ -5,8 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:date_time_format/date_time_format.dart';
 
-import 'package:intl/intl.dart';
-
 class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

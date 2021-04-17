@@ -31,6 +31,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String userID;
   String workShiftID;
+  bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -52,6 +53,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final picker = ImagePicker();
 
   void getHttp() async {
+    setState(() {
+      loading = true;
+    });
     try {
       final bytes = File(_image.path).readAsBytesSync();
       String img64 = base64Encode(bytes);
@@ -63,13 +67,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         "location": "123",
         "workShiftID": workShiftID
       });
+      setState(() {
+        loading = false;
+      });
       // print(response.data);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => CheckOutPage()),
       );
     } catch (e) {
-      // print(e.response);
+      print(e);
+      await _showMyDialogError();
     }
+    setState(() {
+      loading = false;
+    });
+  }
+
+  Future<void> _showMyDialogError() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('โปรดลองใหม่อีกครั้ง'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future getImage() async {
@@ -151,6 +189,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
       );
 
+  Widget loadingAfterPhoto() => Container(
+        child: Material(
+          color: Colors.green, // button color
+          child: InkWell(
+            splashColor: Colors.white, // splash color
+            onTap: () => {},
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.camera_alt,
+                  size: 100,
+                  color: Colors.white,
+                ), // icon
+                Text(
+                  "รอสักครู่",
+                  style: TextStyle(fontSize: 40, color: Colors.white),
+                ), // text
+              ],
+            ),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +226,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: <Widget>[
             SizedBox.fromSize(
               size: Size(300, 300), // button width and height
-              child: ClipOval(child: routerAfterPhoto()),
+              child: ClipOval(
+                child:
+                    loading == false ? routerAfterPhoto() : loadingAfterPhoto(),
+              ),
             ),
           ],
         ),

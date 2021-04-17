@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -169,6 +171,7 @@ class _MainScreenState extends State<MainScreen> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();
     await Navigator.push(context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
+    // exit(0);
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {

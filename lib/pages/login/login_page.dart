@@ -20,8 +20,8 @@ class _LoginState extends State<Login> {
   String linename;
   String image;
   String workShiftID;
-  int errorCode;
-  String errorMsg;
+  var errorCode;
+  var errorMsg;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -63,17 +63,17 @@ class _LoginState extends State<Login> {
       });
       await loginSuccess();
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.statusMessage;
-        });
-      } else {
-        setState(() {
-          errorCode = e.response.statusCode;
-          errorMsg = e.response.data["message"];
-        });
-      }
+      // if (e.response.statusCode == 404) {
+      setState(() {
+        errorCode = e.response.statusCode;
+        errorMsg = e.response.statusMessage;
+      });
+      // } else {
+      //   setState(() {
+      //     errorCode = e.response.statusCode;
+      //     errorMsg = e.response.data["message"];
+      //   });
+      // }
       await _showMyDialog();
       Navigator.of(context).pop();
     }
